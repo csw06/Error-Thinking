@@ -12,9 +12,9 @@ func queryRow(db *sql.DB, name *string) error {
 	err := db.QueryRow("select name from users where id =?", 1).Scan(name)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			log.Fatal(errors.Wrap(err, "QueryRow ErrNoRows"))
+			log.Fatal(err)
 		} else {
-			return err
+			return errors.Wrap(err,"QueryRow error")
 		}
 	}
 	return nil
